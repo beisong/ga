@@ -1,25 +1,15 @@
-<head>
-  <title>ga</title>
-</head>
+<template name="main">
 
-<body>
-  <h1>Welcome to Beisong.ga!</h1>
+    <h1>Welcome!</h1>
 
-  {{> hello}}
-  {{> info}}
-</body>
-
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
+    <ul>
+        {{#each movies}}
+            {{> movie}}
+        {{/each}}
+    </ul>
 </template>
 
-<template name="info">
-  <h2>Learn Meteor!</h2>
-  <ul>
-    <li><a href="https://www.meteor.com/try" target="_blank">Do the Tutorial</a></li>
-    <li><a href="http://guide.meteor.com" target="_blank">Follow the Guide</a></li>
-    <li><a href="https://docs.meteor.com" target="_blank">Read the Docs</a></li>
-    <li><a href="https://forums.meteor.com" target="_blank">Discussions</a></li>
-  </ul>
+
+<template name="movie">
+    <li>{{title}}</li>
 </template>
