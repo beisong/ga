@@ -1,0 +1,27 @@
+<template name="chatapp">
+
+    <h1>Welcome
+        {{#if currentUser}}
+            {{currentUser.profile.name}}
+        {{else}}
+            to Chatapp!
+        {{/if}}
+    </h1>
+
+    {{#if currentUser}}
+        <a href="#" class="logout">Logout</a>
+    {{else}}
+        <a href="{{pathFor 'chat_register'}}">Register</a>
+        <a href="{{pathFor 'chat_login'}}">Log in</a>
+    {{/if}}
+
+    <p>Let's chat.</p>
+
+
+    <p>Message: <input type="text" id="message"></p>
+    {{#each messages}}
+        <strong>{{name}}:</strong> {{message}}<br>
+    {{/each}}
+
+</template>
+
