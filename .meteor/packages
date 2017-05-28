@@ -26,3 +26,6 @@ iron:router
 twbs:bootstrap
 http
 accounts-password
+session
+peppelg:bootstrap-3-modal
+momentjs:moment
