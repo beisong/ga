@@ -5,4 +5,6 @@ Meteor.startup(function () {
         Movies.insert({title: "Memento", director: "Nolan"});
         Movies.insert({title: "King Kong", director: "Jackson"});
     }
+    //SEEDING HEROES INTO DATABASE // CALL ONCE ONLY
+    // Meteor.call('saveHeroes');
 });

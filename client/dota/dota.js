@@ -31,25 +31,40 @@ Template.dota.events({
         // Get value from form element
         var target = event.target;
         var matchid = target.matchid.value;
+
+        ///                 ------------------SHOW PLAYER ID
+        // Meteor.call("getMatchStats", matchid, function (error, results) {
+        //     var matchdata = results.data;
+        //
+        //     for (var i = 0; i < matchdata.result.players.length; i++) {
+        //         var player = matchdata.result.players[i];
+        //
+        //         var playerid = player.account_id;
+        //         console.log(playerid);
+        //         playerid = parseInt(playerid) + 960265728;
+        //         //76561197960265728
+        //         console.log("PLAYER ID =" + playerid);
+        //
+        //         // Meteor.call('insertplayerid', player.account_id, function (error, result) {
+        //         //     if (error) {
+        //         //         console.log("Unable to insert player id");
+        //         //     }
+        //         // });
+        //     }
+        // });
+
+        ///                 ------------------SHOW PICK BANS
         Meteor.call("getMatchStats", matchid, function (error, results) {
             var matchdata = results.data;
+            var pickdata = results.data.result.picks_bans;
 
-            for (var i = 0; i < matchdata.result.players.length; i++) {
-                var player = matchdata.result.players[i];
 
-                var playerid = player.account_id;
-                console.log(playerid);
-                playerid = parseInt(playerid) + 960265728;
-                //76561197960265728
-                console.log("PLAYER ID =" + playerid);
-
-                // Meteor.call('insertplayerid', player.account_id, function (error, result) {
-                //     if (error) {
-                //         console.log("Unable to insert player id");
-                //     }
-                // });
-            }
+            pickdata.forEach(function (oneRecord) {
+                console.log("PICK/BAN : " + oneRecord.is_pick + " |Hero : " + oneRecord.hero_id + " |Team : " + oneRecord.team + " |order : " + oneRecord.order);
+            });
         });
+
+
     },
 });
 

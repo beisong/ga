@@ -23,4 +23,21 @@ Meteor.methods({
     getplayernames: function (id) {
         Dotaplayers.insert({id: id});
     },
+    getHeroes: function () {
+        this.unblock();
+        var url = 'https://api.steampowered.com/IEconDOTA2_570/GetHeroes/v0001/?key=DA06EC331CB45A13D01C9B83155D4868&language=en_us';
+        return Meteor.http.call("GET", url);
+    },
+    saveHeroes: function () {
+        Meteor.call('getHeroes', function (err, res) {
+            // console.log(res);
+            var data = res.data.result.heroes;
+
+            data.forEach(function (oneHero) {
+                console.log(" ----  INSERTING ID : " + oneHero.id + " NAME IS  : " + oneHero.localized_name);
+                Heroes.insert({id: oneHero.id, name: oneHero.localized_name})
+            });
+        })
+
+    },
 });
