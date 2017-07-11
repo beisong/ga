@@ -11,6 +11,10 @@ Meteor.methods({
         this.unblock();
         return Meteor.http.call("GET", "https://api.steampowered.com/IDOTA2Match_570/GetMatchDetails/V001/?match_id=" + matchid + "&key=DA06EC331CB45A13D01C9B83155D4868");
     },
+    getOpenDotaMatchStats: function (matchid) {
+        this.unblock();
+        return Meteor.http.call("GET", "https://api.opendota.com/api/matches/" + matchid);
+    },
     getplayerstats: function (playerid) {
         this.unblock();
         console.log("http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?steamids=" + playerid + "&key=DA06EC331CB45A13D01C9B83155D4868");
@@ -38,6 +42,69 @@ Meteor.methods({
                 Heroes.insert({id: oneHero.id, name: oneHero.localized_name})
             });
         })
-
     },
+    insertCounter: function (heroid, counterid) {
+        Counter.update({hero: heroid, counter: counterid}, {$inc: {count: 1}});
+    },
+
+
 });
+
+
+seedCounterPick = function () {
+    if (Counterpick.find().count() == 0) {
+        var herocount = Heroes.find().count();
+        console.log(herocount);
+        for (var i = 1; i <= herocount; i++) {
+            console.log("THIS HERO NUMBER IS " + i);
+            var objectofheroes = {};
+            for (var j = 1; j <= herocount; j++) {
+                objectofheroes[j] = 0;
+            }
+
+            var toinsert = {
+                id: i,
+                pickbefore: objectofheroes,
+                pickafter: objectofheroes,
+                banbefore: objectofheroes,
+                banafter: objectofheroes
+            };
+            Counterpick.insert(toinsert);
+        }
+    }
+    // var anti = {
+    //     id: 124,
+    //     pickbefore: {'1':0, '2':0, '3':0.......}
+    //     pickafter: {'1':0, '2':0, '3':0.......},
+    //     banbefore: {'1':0, '2':0, '3':0.......},
+    //     banafterbefore: {'1':0, '2':0, '3':0.......},
+    // };
+    // Counterpick.insert(anti);
+
+};
+
+seedPickBefore = function () {
+    if (Pickbefore.find().count() == 0) {
+        var herocount = Heroes.find().count();
+        console.log(herocount);
+        for (var i = 1; i <= herocount; i++) {
+            for (var j = 1; j <= herocount; j++) {
+                Pickbefore.insert({id: i, pickid: j, count: 0});
+            }
+        }
+    }
+};
+
+
+seedCounter = function () {
+    if (Counter.find().count() == 0) {
+        var herocount = Heroes.find().count();
+        console.log(herocount);
+        for (var i = 1; i <= herocount; i++) {
+            for (var j = 1; j <= herocount; j++) {
+                Counter.insert({hero: i, counter: j, count: 0});
+            }
+        }
+    }
+
+};

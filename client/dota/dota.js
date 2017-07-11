@@ -24,6 +24,9 @@ Template.dota.events({
             console.log("lastlogoff : " + date.toDateString());
         });
     },
+    'click #beisongbut2': function (event) {
+        parseArrayOfGames();
+    },
     'submit .dota-form'(event) {
         // Prevent default browser form submit
         event.preventDefault();
@@ -31,6 +34,10 @@ Template.dota.events({
         // Get value from form element
         var target = event.target;
         var matchid = target.matchid.value;
+
+        // parseCounterMatchID(matchid);
+       parseOpenDotaMatchID(matchid);
+
 
         ///                 ------------------SHOW PLAYER ID
         // Meteor.call("getMatchStats", matchid, function (error, results) {
@@ -54,16 +61,6 @@ Template.dota.events({
         // });
 
         ///                 ------------------SHOW PICK BANS
-        Meteor.call("getMatchStats", matchid, function (error, results) {
-            var matchdata = results.data;
-            var pickdata = results.data.result.picks_bans;
-
-
-            pickdata.forEach(function (oneRecord) {
-                console.log("PICK/BAN : " + oneRecord.is_pick + " |Hero : " + oneRecord.hero_id + " |Team : " + oneRecord.team + " |order : " + oneRecord.order);
-            });
-        });
-
 
     },
 });
@@ -73,7 +70,16 @@ Template.dota.events({
 // http://dev.dota2.com/showthread.php?t=58317
 // http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?steamids=76561198051541635&key=DA06EC331CB45A13D01C9B83155D4868\
 
-//MATCH STATS         =    3079544016
+
+//               MATCH STATS         =    3079544016
 // https://api.steampowered.com/IDOTA2Match_570/GetMatchDetails/V001/?match_id=3079544016&key=DA06EC331CB45A13D01C9B83155D4868
-//PLAYER STATS       =     76561197989524226
+
+
+
+//              PLAYER STATS       =     76561197989524226
 // http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?steamids=76561197989524226&key=DA06EC331CB45A13D01C9B83155D4868
+
+
+//             Open DOta Match API
+//https://api.opendota.com/api/matches/3302605423
+
