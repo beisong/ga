@@ -3,10 +3,7 @@ parseArrayOfGames = function () {
     var arrayOfGames = [
 
     ];
-
     // console.log("GAMEPARSED Count : " + Gamesparsed.find({id: arrayOfGames[i]}).count());
-
-
     var arrayLength = arrayOfGames.length;
     for (var i = 0; i < arrayLength; i++) {
         // console.log(arrayOfGames[i]);

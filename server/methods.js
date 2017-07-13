@@ -15,6 +15,10 @@ Meteor.methods({
         this.unblock();
         return Meteor.http.call("GET", "https://api.opendota.com/api/matches/" + matchid);
     },
+    getLeagueData: function (leagueid) {
+        this.unblock();
+        return Meteor.http.call("GET", "https://api.steampowered.com/IDOTA2Match_570/GetMatchHistory/V001/?league_id=" + leagueid + "&key=DA06EC331CB45A13D01C9B83155D4868");
+    },
     getplayerstats: function (playerid) {
         this.unblock();
         console.log("http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?steamids=" + playerid + "&key=DA06EC331CB45A13D01C9B83155D4868");

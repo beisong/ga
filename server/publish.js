@@ -5,3 +5,7 @@ Meteor.publish('movie_list', function () {
 Meteor.publish('games_parsed', function () {
     return Gamesparsed.find();
 });
+
+Meteor.publish('fantasy', function () {
+    return FantasyData.find();
+});

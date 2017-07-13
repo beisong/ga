@@ -25,7 +25,8 @@ Template.dota.events({
         });
     },
     'click #beisongbut2': function (event) {
-        parseArrayOfGames();
+        var league_id = $("#leagueid").val();
+        parseLeague(league_id);
     },
     'submit .dota-form'(event) {
         // Prevent default browser form submit
@@ -36,7 +37,8 @@ Template.dota.events({
         var matchid = target.matchid.value;
 
         // parseCounterMatchID(matchid);
-       parseOpenDotaMatchID(matchid);
+        parseOpenDotaMatchID(matchid);
+        // parseArrayOfGames
 
 
         ///                 ------------------SHOW PLAYER ID
@@ -73,7 +75,6 @@ Template.dota.events({
 
 //               MATCH STATS         =    3079544016
 // https://api.steampowered.com/IDOTA2Match_570/GetMatchDetails/V001/?match_id=3079544016&key=DA06EC331CB45A13D01C9B83155D4868
-
 
 
 //              PLAYER STATS       =     76561197989524226
